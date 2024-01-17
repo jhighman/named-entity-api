@@ -3,6 +3,7 @@
   "name": "named-entity-api",
   "description": "This project was bootstrapped with Fastify-CLI.",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
   "directories": {
     "test": "test"
