@@ -4,6 +4,10 @@
 import helper from 'fastify-cli/helper.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import Fastify from 'fastify';
+import Swagger from '@fastify/swagger';
+import SwaggerUI from '@fastify/swagger-ui';
+import AutoLoad from '@fastify/autoload';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -16,19 +20,42 @@ function config () {
 }
 
 // automatically build and tear down our instance
-async function build (t) {
-  // you can set all the options supported by the fastify CLI command
-  const argv = [AppPath]
+async function build(t) {
+  const app = Fastify();
 
-  // fastify-plugin ensures that all decorators
-  // are exposed for testing purposes, this is
-  // different from the production setup
-  const app = await helper.build(argv, config())
+  // Register Swagger and SwaggerUI
+  app.register(Swagger, {
+    swagger: {
+      info: {
+        title: 'Named Entity API',
+        description: 'A directory of people',
+        version: '0.1.0'
+      },
+      host: 'localhost',
+      schemes: ['http'],
+      consumes: ['application/json'],
+      produces: ['application/json']
+    },
+    exposeRoute: true
+  });
+  app.register(SwaggerUI, {
+    routePrefix: '/api-docs'
+  });
 
-  // tear down our app after we are done
-  t.after(() => app.close())
+  // Register autoload plugins
+  app.register(AutoLoad, {
+    dir: path.join(__dirname, '..', 'plugins'), // Adjust path if needed
+    options: {}
+  });
+  app.register(AutoLoad, {
+    dir: path.join(__dirname, '..', 'routes'), // Adjust path if needed
+    options: {}
+  });
 
-  return app
+  // Tear down our app after we are done
+  t.after(() => app.close());
+
+  return app;
 }
 
 export {

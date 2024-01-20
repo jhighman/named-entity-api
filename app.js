@@ -8,6 +8,7 @@ import fastify from 'fastify'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+
 // Pass --options via CLI arguments in command to enable these options.
 export const options = {}
 
@@ -47,5 +48,6 @@ export default async function (fastify, opts) {
     dir: path.join(__dirname, 'routes'),
     options: Object.assign({}, opts)
   })
+
 
 }

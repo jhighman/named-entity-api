@@ -259,3 +259,9 @@ export const workItemSchema = {
     additionalProperties: false,
     description: 'A schema for a work item, representing a simple unit of work with an identifier, status, associated dates, and references to other entities like subjects, claims, or credentials.'
 };
+
+export const workItemListSchema = {
+    type: 'array',
+    items: { $ref: 'workItem#' }, // Reference the schema by its unique identifier
+    description: 'A schema for a list of work items.'
+};

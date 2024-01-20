@@ -1,10 +1,18 @@
-import { workItemSchema, namedEntitySchema, errorSchema, searchQuerySchema, claimSchema, verifiedClaimSchema } from '../schemas/index.js'
+import { workItemSchema, errorSchema, claimSchema, verifiedClaimSchema, workItemListSchema } from '../schemas/index.js'
+import { getWorkById, listAllWorkItems, /* other exported methods */ } from '../controllers/work.controller.js';
+import { getClaimByWFId } from '../controllers/claim.controller.js';
+
 
 export default async function (fastify, opts) {
 
   fastify.addSchema({
     $id: 'workItem',
     ...workItemSchema
+  });
+
+  fastify.addSchema({
+    $id: 'workItemList',
+    ...workItemListSchema
   });
 
   fastify.addSchema({
@@ -22,6 +30,7 @@ export default async function (fastify, opts) {
     $id: 'error',
     ...errorSchema
   })
+
 
 
   // Hardcoded list of named entities
@@ -186,6 +195,48 @@ export default async function (fastify, opts) {
     }
   });
 
+  fastify.get('/alt/work', {
+    schema: {
+      response: {
+        200: workItemListSchema
+      }
+    }
+  }, async function (request, reply) {
+    try {
+      const workItems = await listAllWorkItems();
+      if (workItems && workItems.length > 0) {
+        reply.send(workItems);
+      } else {
+        reply.code(404).send({ error: 'No work items found' });
+      }
+    } catch (error) {
+      reply.status(500).send({ error: error.message });
+    }
+  });
+
+  fastify.get('/alt/work/:id', {
+    schema: {
+      response: {
+        200: workItemSchema,
+        404: errorSchema,
+        500: errorSchema
+      }
+    }
+  }, async function (request, reply) {
+    try {
+      const id = request.params.id;
+      const workItem = await getWorkById(id);
+      if (workItem) {
+        reply.send(workItem);
+      } else {
+        reply.code(404).send({ code: '404', message: 'Work item not found' });
+      }
+    } catch (error) {
+      reply.status(500).send({ code: '500', message: error.message });
+    }
+  });
+
+  
   // GET /claim/:id route
   fastify.get('/claim/:id', {
     schema: {
@@ -196,7 +247,7 @@ export default async function (fastify, opts) {
     }
   }, async function (request, reply) {
     const id = request.params.id;
-    const claim = claims.find(c => c.workflowId === id);
+    const claim = await getClaimByWFId(id);
 
     if (!claim) {
       reply.code(404).send({
@@ -217,7 +268,8 @@ export default async function (fastify, opts) {
     }
   }, async function (request, reply) {
     const id = request.params.id;
-    const claim = verifiedClaims.find(c => c.workflowId === id);
+    const claim = await getClaimByWFId(id);
+    //const claim = verifiedClaims.find(c => c.workflowId === id);
 
     if (!claim) {
       reply.code(404).send({
