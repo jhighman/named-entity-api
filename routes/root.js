@@ -1,6 +1,5 @@
 import { workItemSchema, errorSchema, claimSchema, verifiedClaimSchema, workItemListSchema } from '../schemas/index.js'
 import { getWorkItems, getWorkItemById /* other exported methods */ } from '../models/work.model.js';
-import { getClaimByWFId } from '../controllers/claim.controller.js';
 import { getAllClaims, getClaimByWorkflowId } from '../models/claim.model.js';
 import { getAllVerifiedClaims, getVerifiedClaimByWorkflowId } from '../models/verified.claim.model.js';
 
@@ -32,154 +31,6 @@ export default async function (fastify, opts) {
     $id: 'error',
     ...errorSchema
   })
-
-
-
-  // Hardcoded list of named entities
-
-  const workItems = [
-    {
-      id: "1",
-      status: "notStarted",
-      dates: {
-        startedDate: null,
-        completedDate: null,
-        publishedDate: null,
-        archivedDate: null
-      },
-      workItemReferenceId: "1",
-      referenceType: "claim"
-    },
-    {
-      id: "2",
-      status: "started",
-      dates: {
-        startedDate: "2024-01-03T10:00:00",
-        completedDate: null,
-        publishedDate: null,
-        archivedDate: null
-      },
-      workItemReferenceId: "2",
-      referenceType: "subject"
-    },
-    {
-      id: "3",
-      status: "complete",
-      dates: {
-        startedDate: "2024-01-05T10:00:00",
-        completedDate: "2024-01-06T15:00:00",
-        publishedDate: null,
-        archivedDate: null
-      },
-      workItemReferenceId: "3",
-      referenceType: "credential"
-    }
-  ];
-
-
-  const claims = [
-    {
-      workflowId: "1",
-      credentialSubject: {
-        firstName: "Alice",
-        middleName: "M.",
-        lastName: "Johnson"
-      },
-      claimType: "license",
-      identifier: "ID-12345",
-      identifierDescriptor: "Driver's License ID",
-      subtype: "Driver",
-      reference: "DL-12345-AB",
-      referenceSystem: "DMV",
-      referenceType: "System ID"
-    },
-    {
-      workflowId: "2",
-      credentialSubject: {
-        firstName: "Bob",
-        middleName: "D.",
-        lastName: "Smith"
-      },
-      claimType: "certification",
-      identifier: "ID-67890",
-      identifierDescriptor: "Professional Certification ID",
-      subtype: "Project Management",
-      reference: "PM-67890-XY",
-      referenceSystem: "Certification Board",
-      referenceType: "Certification ID"
-    },
-    {
-      workflowId: "3",
-      credentialSubject: {
-        firstName: "Carol",
-        middleName: "L.",
-        lastName: "Taylor"
-      },
-      claimType: "degree",
-      identifier: "ID-112233",
-      identifierDescriptor: "University Degree ID",
-      subtype: "Bachelor of Science",
-      reference: "UD-112233-ZZ",
-      referenceSystem: "University",
-      referenceType: "Degree ID"
-    }
-  ];
-
-  const verifiedClaims = [
-    {
-      claim: {
-        workflowId: '1',
-        claimType: 'license',
-        identifier: 'ID-12345',
-        identifierDescriptor: 'Driver License ID',
-        subtype: 'Driver',
-        reference: 'DL-12345-AB',
-        referenceSystem: 'DMV',
-        referenceType: 'System ID'
-      },
-      verification: {
-
-        verificationStatus: 'verified',
-        verificationDate: '2024-01-01',
-        claimStatus: 'active'
-      }
-    },
-    {
-      claim: {
-        workflowId: '1',
-        claimType: 'certification',
-        identifier: 'ID-67890',
-        identifierDescriptor: 'Professional Certification ID',
-        subtype: 'Project Management',
-        reference: 'PM-67890-XY',
-        referenceSystem: 'Certification Board',
-        referenceType: 'Certification ID'
-      },
-      verification: {
-        verificationStatus: 'pending',
-        verificationDate: '2024-01-02',
-        claimStatus: 'pending'
-      }
-    },
-    {
-      claim: {
-        workflowId: '1',
-        claimType: 'degree',
-        identifier: 'ID-112233',
-        identifierDescriptor: 'University Degree ID',
-        subtype: 'Bachelor of Science',
-        reference: 'UD-112233-ZZ',
-        referenceSystem: 'University',
-        referenceType: 'Degree ID'
-      },
-      verification: {
-        verificationStatus: 'denied',
-        verificationDate: '2024-01-03',
-        claimStatus: 'inactive'
-      }
-    }
-  ];
-
   
   // GET /claim/:id route
   fastify.get('/claim', {
@@ -203,7 +54,7 @@ export default async function (fastify, opts) {
   });
 
   // GET /work route
-  fastify.get('/work', {
+  fastify.get('/work/next', {
     schema: {
       response: {
         200: workItemSchema
@@ -227,7 +78,7 @@ export default async function (fastify, opts) {
     }
   });
 
-  fastify.get('/alt/work', {
+  fastify.get('/work/all', {
     schema: {
       response: {
         200: workItemListSchema
@@ -246,7 +97,7 @@ export default async function (fastify, opts) {
     }
   });
 
-  fastify.get('/alt/work/:id', {
+  fastify.get('/work/:id', {
     schema: {
       response: {
         200: workItemSchema,
@@ -269,7 +120,7 @@ export default async function (fastify, opts) {
   });
  
   // GET /claim/:id route
-  fastify.get('/claim/:id', {
+  fastify.get('/claim/byWorkflowId/:id', {
     schema: {
       response: {
         200: claimSchema,
@@ -290,7 +141,7 @@ export default async function (fastify, opts) {
     }
   });
 
-  fastify.get('/jeff', {
+  fastify.get('/verified/claims', {
     schema: {
       response: {
         200: verifiedClaimSchema,
@@ -312,7 +163,7 @@ export default async function (fastify, opts) {
     }
   });
 
-  fastify.get('/jeff/:id', {
+  fastify.get('/verified/claim/byWorkflowId/:id', {
     schema: {
       response: {
         200: verifiedClaimSchema,
