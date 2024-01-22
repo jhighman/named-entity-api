@@ -1,0 +1,300 @@
+mkdrir 23
+mkdir 23
+cd 23
+take truascores
+touch truascores.jdl
+nano truascores.jdl
+rm truascores.jdl
+touch turascores.jdl
+jhipster jdl truascores.jdl
+rm -rf truascores
+take trascores
+rm -rf trascores
+jhipster entity ValidationItemDet
+/mvnw -Pprod
+./mvnw -Pprod
+jhipster export-jdl my-jhipster-app.jdl
+texpad my-jhipster-app.jdl
+textedit my-jhipster-app.jdl
+nano my-jhipster-app.jdl
+jhipster entity ValidationItem
+jhipster entity ScoreLedger
+jhipster export-jdl truascores2.jdl
+rm -rf trauscores
+rm *'jdl\nls\npwd
+rm *.jdl
+cd truascores
+sudo lsof -i :18080
+sudo kill 73394
+jhipster entity TruaIdentity
+mv *.jdl /truascores
+mv *.jdl truascores
+jhipster jdl truascores2.jdl
+jhipster export-jdl truascores3.jdl
+nano truascores3.jdl
+jhipster jdl truascores3.jdl
+sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+mkdir rust
+take rust
+cargo new guessiing_game
+cd guessiing_game
+code main.rs
+cargo run
+xcode-select --install
+npm -version
+npm - upgrade
+npm help
+node -v
+cd 24
+mkdir crawla
+cd crawla
+npx crawlee create my-crawler
+cd my-crawler
+npm start
+npx playwright install
+mkdir crawlb
+cd crawlb
+mkdir crawlc
+cd crawlc
+npx crawlee create naic-crawler
+cd naic-crawler
+mkdir crawld
+cd crawld
+cd storage
+cd request_queues
+cd datasets
+cd default
+npm i fastify
+cd fast1
+npm init -y
+npm i -D typescript @types/node
+tsc --init
+npx tsc --init
+nmp run build
+npm build
+npm run build
+npm i -g nodemon
+sudo npm i -g nodemon
+npm run start
+npm i fastify-openapi-glue --save
+mkdir fast2
+tail take.txt
+. code
+cd apps/
+cd fast2
+openapi-glue er.yml
+npx github:seriousme/fastify-openapi-glue er.yml
+npx github:seriousme/fastify-openapi-glue er.json
+npm init
+mkdir eric
+cd eric
+fastify --help
+npm install --global fastify-cli
+sudi npm install --global fastify-cli
+sudo npm install --global fastify-cli
+fastify generate named-entity-api --esm
+cd named-entity-api
+npm run dev
+npm install @fastify/swagger @fastify/swagger-ui
+fastify generate-swagger app.js
+python --version
+mkdir college
+cd college
+cat hello_world.py
+nano hello_world.py
+python hello_world.py
+touch rpc.py
+nano rpc.py
+python rpc.py
+touch evenorodd.py
+nano evenorodd.py
+python evenorodd.py
+cd fast 2
+nano package.json
+cd schemas
+npm run info
+clear
+git init
+nano .gitignore
+git commit -m "Initial commit"
+git remote add origin git commit -m "Initial commit"
+git remote add origin https://github.com/jhighman/named-entity-api
+git push -u origin master
+git config --global user.name "jhighman@gmail.com"
+git config --global user.email "jhighman@gmail.com"
+git push
+git push --set-upstream origin master
+cp -R /Users/cto/apps/24/eric/named-entity-api /Users/cto/apps/24\n
+git config --global credential.helper osxkeychain
+git remote add origin https://github.com/jhighman/named-entity-api\n
+git remote add origin https://github.com/jhighman/named-entity\n
+git init -b main
+git add .
+git commit -m "First commit"
+gh repo create
+git remote add orgin https://github.com/jhighman/named-entity-api.git
+git remote -v
+git push -u origin main
+git reset
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jhighman/named-entity-api.git
+hero create cognosere
+npm install -g heroku
+sudo npm install -g heroku
+herko create cognosere
+heroku create cognosere
+node -- version
+nano Procfile
+git commit
+git commit -m "added procfile"
+git push heroku master
+git push heroku main
+Heroku open
+git commit -m "added listener for heroku"
+git commit -a
+git commit -m "fix"
+git commit -m "fix again"
+/Users/cto/Downloads/favicon_io/favicon.ico
+cp /Users/cto/Downloads/favicon_io/favicon.ico
+sudo cp /Users/cto/Downloads/favicon_io/favicon.ico
+sudo cp /Users/cto/Downloads/favicon_io/favicon.ico .
+git commit -m "added favicon"
+git push Heroku main
+git commit - m "welp"
+git commit -m "welp"
+git commit -m "hmm"
+heroku restart
+git clone https://github.com/arufian/fastify-heroku.git
+cd fastify-heroku
+git commit -m "inital commit"
+git remote add origin https://github.com/jhighman/fastify-heroku.git
+git add
+git remote remove origin
+herko create
+heroku create
+cd routes
+mkdir schemas
+nano index.js
+nano root.js
+nano app.js
+git commit -m "let's hope this works"
+git pull heroku main
+git config pull.rebase false
+npm audit
+npm audit fix
+node -version
+heroku buildpacks
+cd 25
+mkdir 25
+git clone https://github.com/jhighman/fastify-heroku.git
+dir
+git clone https://github.com/jhighman/named-entity-api.git
+git add.
+git push origin
+git commit -m "added something small"
+git add >
+pull
+git push --set-upstream origin main
+git push --set-upstream origin
+git commit -am "make it better"
+jhipster victor
+brew upgrade node
+sudo brew upgrade node
+npm update npm -g
+sudo npm update npm -g
+nvm install 20.6.1
+nvm -ls
+nvm --version
+npm install -g n
+sudo npm install -g n
+n latest
+sudo n latest
+mkdir vic
+cd vic
+npm install -g generator-jhipster-nodejs
+sudo npm install -g generator-jhipster-nodejs
+jhipster --blueprints nodejs
+sudo npm update -g generator-jhipster-nodejs
+nhipster
+cd webapp
+cd docher
+cd docker
+cd app
+cd shared
+cd model
+nhipster entity claim
+nx --version
+nx -version
+nx report
+run nx format:check
+rm -rf vic
+nhipster entity:claim
+nhipster -entity claim
+nhipster --help
+nhipster entity Claim
+npm test -- models/workItemModel.test.js
+npm test
+mkdir
+mkdir Jack
+cd jack
+nano oddOrEven.c
+gcc oddOrEven.c
+rm *.out
+gcc -o even_odd_game oddOrEven.c
+./even_odd_game
+rm -rf crawla
+rm -rf crawlb
+rm -rf crawlc
+rm -rf crawld
+rm -rf eric
+rm -rf fast1
+rm -rf fast2
+git commit -m "refactored for mdularity"
+git commit -m "refactored the model classes with enumerated fields"
+brew install mongodb-atlas
+atlas setup
+show dbs
+atlas -help
+atlas --help
+atlas projects
+atlas projects list
+atlas projects users
+atlas projects users list
+cd ,,
+atlas projects apiKeys create --role GROUP_OWNER --desc "New API Key"
+atlas config init --profile automation
+atlas clusters ls --profile automation
+atlas cluster list
+atlas -list commands
+atlas --list commands
+atlas --list
+atlas --commands
+atlas organizations list
+mkDir bapi
+cd bapi
+npm -i fastify mongoose dotenv
+npm i fastify mongoose dotenv
+code
+node src/app.js
+clang --version
+cd Jack
+mkdir helloword
+cd projects
+cd helloword
+nanon oddOrEven.c
+./ oddOrEven
+chmod *.* 777
+chmod 777 *.*
+./oddOrEven
+mkdir rpc
+cd rpc
+nano rpc.c
+gcc -o rock_paper_scissors rpc.c
+./rock_paper_scissors
+1
+node .
+history | awk '!x[$2]++' | tail -n 100 > last_100_unique_commands.txt\n
+nano last_100_unique_commands.txt
+history | awk '{$1=""; sub(/^[ \t]+/, ""); print}' | awk '!x[$0]++' | tail -n 100 > last_100_unique_commands.txt\n
+history | awk '{$1=""; sub(/^[ \t]+/, ""); print}' | awk '!x[$0]++' | tail -n 200 > last_100_unique_commands.txt\n

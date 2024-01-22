@@ -1,0 +1,104 @@
+npm i fastify
+npm init -y
+npm i -D typescript @types/node
+tsc --init
+npx tsc --init
+nmp run build
+npm i -g nodemon
+npm i fastify-openapi-glue --save
+openapi-glue er.yml
+npx github:seriousme/fastify-openapi-glue er.yml
+npx github:seriousme/fastify-openapi-glue er.json
+fastify --help
+npm install --global fastify-cli
+sudo npm install --global fastify-cli
+fastify generate named-entity-api --esm
+npm install @fastify/swagger @fastify/swagger-ui
+fastify generate-swagger app.js
+npm run info
+git init
+git commit -m "Initial commit"
+git remote add origin git commit -m "Initial commit"
+git remote add origin https://github.com/jhighman/named-entity-api
+git push -u origin master
+git push --set-upstream origin master
+git config --global credential.helper osxkeychain
+git remote add origin https://github.com/jhighman/named-entity-api\n
+git remote add origin https://github.com/jhighman/named-entity\n
+git init -b main
+git add .
+git commit -m "First commit"
+gh repo create
+git remote add orgin https://github.com/jhighman/named-entity-api.git
+git remote -v
+git push -u origin main
+git reset
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jhighman/named-entity-api.git
+hero create cognosere
+npm install -g heroku
+sudo npm install -g heroku
+herko create cognosere
+heroku create cognosere
+git commit
+git commit -m "added procfile"
+git push heroku main
+Heroku open
+heroku restart
+git clone https://github.com/arufian/fastify-heroku.git
+git commit -m "inital commit"
+git remote add origin https://github.com/jhighman/fastify-heroku.git
+git add
+git remote remove origin
+herko create
+heroku create
+git commit -m "let's hope this works"
+git pull heroku main
+git config pull.rebase false
+npm audit
+npm audit fix
+node -version
+heroku buildpacks
+git push origin
+git commit -m "added something small"
+git push --set-upstream origin
+sudo brew upgrade node
+npm update npm -g
+sudo npm update npm -g
+nvm install 20.6.1
+nvm -ls
+nvm --version
+npm install -g n
+sudo npm install -g n
+n latest
+sudo n latest
+npm install -g generator-jhipster-nodejs
+sudo npm install -g generator-jhipster-nodejs
+nx --version
+nx -version
+nx report
+run nx format:check
+npm test -- models/workItemModel.test.js
+gcc -o even_odd_game oddOrEven.c
+brew install mongodb-atlas
+atlas setup
+show dbs
+atlas -help
+atlas --help
+atlas projects
+atlas projects list
+atlas projects users
+atlas projects users list
+atlas projects apiKeys create --role GROUP_OWNER --desc "New API Key"
+atlas config init --profile automation
+atlas clusters ls --profile automation
+atlas cluster list
+atlas -list commands
+atlas --list commands
+atlas --list
+atlas --commands
+atlas organizations list
+npm -i fastify mongoose dotenv
+npm i fastify mongoose dotenv
+node src/app.js

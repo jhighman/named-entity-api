@@ -28,7 +28,7 @@ const generateWorkflowId = () => {
   return workflowIdCounter.toString();
 };
 
-const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype, reference, referenceSystem, referenceType) => ({
+const createClaim = (credentialSubject, claimType, identifier, identifierDescriptor, subtype, reference, referenceSystem, referenceType) => ({
   workflowId: generateWorkflowId(),
   credentialSubject,
   claimType,
@@ -43,6 +43,7 @@ const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype
 const sample_LICENSE_claim = {
   credentialSubject: { firstName: "Jack", middleName: "M.", lastName: "Johnson" },
   claimType: ClaimTypeEnum.LICENSE,
+  identifier: "ID-12345", // Example identifier
   identifierDescriptor: "Driver's License ID",
   subtype: "Driver",
   reference: "DL-12345-AB",
@@ -53,6 +54,7 @@ const sample_LICENSE_claim = {
 const sample_CERTIFICATION_claim = {
   credentialSubject: { firstName: "Bob", middleName: "D.", lastName: "Smith" },
   claimType: ClaimTypeEnum.CERTIFICATION,
+  identifier: "ID-12345", // Example identifier
   identifierDescriptor: "Professional Certification ID",
   subtype: "Project Management",
   reference: "jonnyappleseed@rmail.com",
@@ -63,6 +65,7 @@ const sample_CERTIFICATION_claim = {
 const sample_DEGREE_claim = {
   credentialSubject: { firstName: "Carol", middleName: "L.", lastName: "Taylor" },
   claimType: ClaimTypeEnum.DEGREE,
+  identifier: "ID-12345", // Example identifier
   identifierDescriptor: "University Degree ID",
   subtype: "Bachelor of Science",
   reference: "P987987987978",

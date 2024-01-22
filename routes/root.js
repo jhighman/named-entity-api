@@ -1,9 +1,11 @@
 import { workItemSchema, errorSchema, claimSchema, verifiedClaimSchema, workItemListSchema } from '../schemas/index.js'
-import { getWorkById, listAllWorkItems, /* other exported methods */ } from '../controllers/work.controller.js';
+import { getWorkItems, getWorkItemById /* other exported methods */ } from '../models/work.model.js';
 import { getClaimByWFId } from '../controllers/claim.controller.js';
-
+import { getAllClaims, getClaimByWorkflowId } from '../models/claim.model.js';
+import { getAllVerifiedClaims, getVerifiedClaimByWorkflowId } from '../models/verified.claim.model.js';
 
 export default async function (fastify, opts) {
+  fastify.setReplySerializer(payload => JSON.stringify(payload, null, 2));
 
   fastify.addSchema({
     $id: 'workItem',
@@ -178,6 +180,27 @@ export default async function (fastify, opts) {
     }
   ];
 
+  
+  // GET /claim/:id route
+  fastify.get('/claim', {
+    schema: {
+      response: {
+        200: claimSchema,
+        404: errorSchema
+      }
+    }
+  }, async function (request, reply) {
+    const claims = getAllClaims();
+
+    if (!claims) {
+      reply.code(404).send({
+        code: 404,
+        message: 'Claim not found for this workflow'
+      }); 
+    } else {
+      return claims;
+    }
+  });
 
   // GET /work route
   fastify.get('/work', {
@@ -187,11 +210,20 @@ export default async function (fastify, opts) {
       }
     }
   }, async (request, reply) => {
-    // Return the first element of the workItems array
-    if (workItems.length > 0) {
-      return workItems[0];
-    } else {
-      reply.code(404).send({ error: 'No work items found' });
+    try {
+      const workItems = await getWorkItems();
+      if (workItems && workItems.length > 0) {
+        // Return the first element of the workItems array
+        if (workItems.length > 0) {
+          return workItems[0];
+        } else {
+          reply.code(404).send({ error: 'No work items found at intex 1' });
+        }
+      } else {
+        reply.code(404).send({ error: 'No work items found' });
+      }
+    } catch (error) {
+      reply.status(500).send({ error: error.message });
     }
   });
 
@@ -203,7 +235,7 @@ export default async function (fastify, opts) {
     }
   }, async function (request, reply) {
     try {
-      const workItems = await listAllWorkItems();
+      const workItems = getWorkItems();
       if (workItems && workItems.length > 0) {
         reply.send(workItems);
       } else {
@@ -225,7 +257,7 @@ export default async function (fastify, opts) {
   }, async function (request, reply) {
     try {
       const id = request.params.id;
-      const workItem = await getWorkById(id);
+      const workItem = getWorkItemById(id);
       if (workItem) {
         reply.send(workItem);
       } else {
@@ -235,8 +267,7 @@ export default async function (fastify, opts) {
       reply.status(500).send({ code: '500', message: error.message });
     }
   });
-
-  
+ 
   // GET /claim/:id route
   fastify.get('/claim/:id', {
     schema: {
@@ -247,7 +278,7 @@ export default async function (fastify, opts) {
     }
   }, async function (request, reply) {
     const id = request.params.id;
-    const claim = await getClaimByWFId(id);
+    const claim = getClaimByWorkflowId(id);
 
     if (!claim) {
       reply.code(404).send({
@@ -259,7 +290,7 @@ export default async function (fastify, opts) {
     }
   });
 
-  fastify.get('/claim/verified/:id', {
+  fastify.get('/jeff', {
     schema: {
       response: {
         200: verifiedClaimSchema,
@@ -268,21 +299,42 @@ export default async function (fastify, opts) {
     }
   }, async function (request, reply) {
     const id = request.params.id;
-    const claim = await getClaimByWFId(id);
+    const verifiedClaims = getAllVerifiedClaims();
     //const claim = verifiedClaims.find(c => c.workflowId === id);
 
-    if (!claim) {
+    if (!verifiedClaims) {
       reply.code(404).send({
         code: 404,
         message: 'Claim not found for this workflow'
-      }); s
+      }); 
     } else {
-      return claim;
+      return verifiedClaims;
     }
   });
 
+  fastify.get('/jeff/:id', {
+    schema: {
+      response: {
+        200: verifiedClaimSchema,
+        404: errorSchema
+      }
+    }
+  }, async function (request, reply) {
+    const id = request.params.id;
+    const verifiedClaim = getVerifiedClaimByWorkflowId(id);
+    //const claim = verifiedClaims.find(c => c.workflowId === id);
+
+    if (!verifiedClaim) {
+      reply.code(404).send({
+        code: 404,
+        message: 'Claim not found for this workflow'
+      }); 
+    } else {
+      return verifiedClaim;
+    }
+  });
 
   fastify.get('/', async function (request, reply) {
     return { root: true }
-  })
+  });
 }

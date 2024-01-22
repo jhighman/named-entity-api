@@ -1,30 +1,37 @@
 import { ClaimTypeEnum, IdentifierEnum, ReferenceSystemEnum, ReferenceTypeEnum, VerificationStatusEnum, ClaimStatusEnum } from './enums.js';
 
 let workflowIdCounter = 0;
+let verifiedClaims = [];
 
 const generateWorkflowId = () => {
   workflowIdCounter += 1;
   return workflowIdCounter.toString();
 };
 
-const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype, reference, referenceSystem, referenceType, verificationStatus, verificationDate, claimStatus) => ({
-  claim: {
-    workflowId: generateWorkflowId(),
-    credentialSubject,
-    claimType: ClaimTypeEnum[claimType],
-    identifier: IdentifierEnum[claimType],
-    identifierDescriptor,
-    subtype,
-    reference,
-    referenceSystem: ReferenceSystemEnum[referenceSystem],
-    referenceType: ReferenceTypeEnum[referenceType]
-  },
-  verification: {
-    verificationStatus,
-    verificationDate,
-    claimStatus
-  }
-});
+// Modified createClaim function with logging and adding the claim to the array
+const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype, reference, referenceSystem, referenceType, verificationStatus, verificationDate, claimStatus) => {
+  const newClaim = {
+    claim: {
+      workflowId: generateWorkflowId(),
+      credentialSubject,
+      claimType: ClaimTypeEnum[claimType],
+      identifier: IdentifierEnum[claimType],
+      identifierDescriptor,
+      subtype,
+      reference,
+      referenceSystem: ReferenceSystemEnum[referenceSystem],
+      referenceType: ReferenceTypeEnum[referenceType]
+    },
+    verification: {
+      verificationStatus,
+      verificationDate,
+      claimStatus
+    }
+  };
+
+  console.log("Creating New Claim:", JSON.stringify(newClaim, null, 2));
+  return newClaim;
+};
 
 const sample_LICENSE_claim = {
   credentialSubject: { firstName: "Jack", middleName: "M.", lastName: "Johnson" },
@@ -65,13 +72,10 @@ const sample_DEGREE_claim = {
   claimStatus: ClaimStatusEnum.INACTIVE
 };
 
-const verifiedClaims = [
-  createClaim(sample_LICENSE_claim),
-  createClaim(sample_CERTIFICATION_claim),
-  createClaim(sample_DEGREE_claim)
-];
+verifiedClaims.push(createClaim(sample_LICENSE_claim));
+verifiedClaims.push(createClaim(sample_CERTIFICATION_claim));
+verifiedClaims.push(createClaim(sample_DEGREE_claim));
 
-console.log(JSON.stringify(verifiedClaims, null, 2));
 
 export const findVerifiedClaimByReference = (reference, referenceSystem, referenceType) => {
   // Input validation
@@ -140,7 +144,7 @@ export const deleteVerifiedClaim = (workflowId) => {
 
 // Function to get all claims
 export const getAllVerifiedClaims = () => {
-  console.log("Fetching all claims");
+  console.log("-------- > Fetching all claims");
   return verifiedClaims;
 }
 
@@ -149,21 +153,34 @@ export const getVerifedClaimByWorkflowId = (workflowId) => {
   console.log(`Fetching claim with workflowId: ${workflowId}`);
   const verifiedClaim = verifiedClaims.find(verifiedClaim => verifiedClaim.workflowId === workflowId);
 
-  if (!claim) {
+  if (!verifiedClaim) {
     throw new Error(`Claim with workflowId ${workflowId} not found`);
   }
 
   return verifiedClaim;
 }
 
-// Function to get a claim by referenceId
-export const getVerifiedClaimByReferenceId = (referenceId) => {
-  console.log(`Fetching claim with referenceId: ${referenceId}`);
-  const verifiedClaim = verifiedClaims.find(verifiedClaim => verifiedClaim.reference === referenceId);
+// Function to log all current verified claims
+export const logAllVerifiedClaims = () => {
+  console.log("Current state of verifiedClaims:", JSON.stringify(verifiedClaims, null, 2));
+};
 
-  if (!verifiedClaim) {
-    throw new Error(`Claim with referenceId ${referenceId} not found`);
+// Function to get a claim by workflowID
+export const getVerifiedClaimByWorkflowId = (workflowId) => {
+  console.log(`Fetching verified claim with workflowId: ${workflowId}`);
+  logAllVerifiedClaims();
+  if (!workflowId) {
+    throw { errorCode: 1, message: "Workflow ID must be provided" };
   }
 
-  return verifiedClaim;
+  // Corrected filter condition
+  const matchedClaims = verifiedClaims.filter(verifiedClaim => verifiedClaim.claim.workflowId === workflowId);
+
+  if (matchedClaims.length === 0) {
+    throw { errorCode: 100, message: "No claim found with the provided workflow ID" };
+  } else if (matchedClaims.length > 1) {
+    throw { errorCode: 101, message: "Multiple claims found with the provided workflow ID" };
+  } 
+  return { errorCode: 0, claim: matchedClaims[0] };
 }
+
