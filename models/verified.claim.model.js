@@ -1,4 +1,4 @@
-import { ClaimTypeEnum, IdentifierEnum, ReferenceSystemEnum, ReferenceTypeEnum, VerificationStatusEnum, ClaimStatusEnum } from './enums.js';
+import { ClaimTypeEnum,  ReferenceSystemEnum, ReferenceTypeEnum, VerificationStatusEnum, ClaimStatusEnum } from './enums.js';
 
 let workflowIdCounter = 0;
 let verifiedClaims = [];
@@ -9,23 +9,35 @@ const generateWorkflowId = () => {
 };
 
 // Modified createClaim function with logging and adding the claim to the array
-const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype, reference, referenceSystem, referenceType, verificationStatus, verificationDate, claimStatus) => {
+const createClaim = ({
+  credentialSubject, 
+  claimType,
+  identifier, 
+  identifierDescriptor, 
+  subtype, 
+  reference, 
+  referenceSystem, 
+  referenceType, 
+  verificationStatus, 
+  verificationDate, 
+  claimStatus
+}) => {
   const newClaim = {
     claim: {
       workflowId: generateWorkflowId(),
       credentialSubject,
-      claimType: ClaimTypeEnum[claimType],
-      identifier: IdentifierEnum[claimType],
+      claimType: claimType,
+      identifier, // Ensure this line is correct
       identifierDescriptor,
       subtype,
       reference,
-      referenceSystem: ReferenceSystemEnum[referenceSystem],
+      referenceSystem: referenceSystem,
       referenceType: ReferenceTypeEnum[referenceType]
     },
     verification: {
-      verificationStatus,
+      verificationStatus: verificationStatus,
       verificationDate,
-      claimStatus
+      claimStatus: claimStatus,
     }
   };
 
@@ -33,9 +45,11 @@ const createClaim = (credentialSubject, claimType, identifierDescriptor, subtype
   return newClaim;
 };
 
+
 const sample_LICENSE_claim = {
   credentialSubject: { firstName: "Jack", middleName: "M.", lastName: "Johnson" },
   claimType: ClaimTypeEnum.LICENSE,
+  identifier: "XX",
   identifierDescriptor: "Driver's License ID",
   subtype: "Driver",
   reference: "DL-12345-AB",
@@ -43,12 +57,13 @@ const sample_LICENSE_claim = {
   referenceType: ReferenceTypeEnum.BIO_ID,
   verificationStatus: VerificationStatusEnum.VERIFIED,
   verificationDate: "2024-01-01",
-  claimStatus: ClaimStatusEnum
+  claimStatus: ClaimStatusEnum.PENDING
 };
 
 const sample_CERTIFICATION_claim = {
   credentialSubject: { firstName: "Bob", middleName: "D.", lastName: "Smith" },
   claimType: ClaimTypeEnum.CERTIFICATION,
+  identifier: "XX",
   identifierDescriptor: "Professional Certification ID",
   subtype: "Project Management",
   reference: "jonnyappleseed@rmail.com",
@@ -62,6 +77,7 @@ const sample_CERTIFICATION_claim = {
 const sample_DEGREE_claim = {
   credentialSubject: { firstName: "Carol", middleName: "L.", lastName: "Taylor" },
   claimType: ClaimTypeEnum.DEGREE,
+  identifier: "XX",
   identifierDescriptor: "University Degree ID",
   subtype: "Bachelor of Science",
   reference: "P987987987978",

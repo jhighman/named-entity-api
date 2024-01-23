@@ -6,7 +6,6 @@
  * These external systems are used for further verification and identification of individuals.
  *
  * - `ClaimTypeEnum`: Defines the type of claim (e.g., license, certification, degree).
- * - `IdentifierEnum`: Maps each claim type to a unique identifier, which is specific to the claim and used for internal tracking.
  * - `ReferenceSystemEnum`: Enumerates the external IT systems (e.g., TRUA, ENDERA_CE). These systems contain additional data and are used to cross-reference and validate the claims.
  * - `ReferenceTypeEnum`: Represents the type of reference used to identify individuals in the external systems (e.g., biometric ID, personal unique ID, email, decentralized ID).
  *
@@ -15,7 +14,6 @@
  * The `createClaim` function assembles these elements into a structured claim object, tying together internal data with external verification points.
  */
 
-// Enumeration and Function Definitions (ClaimTypeEnum, IdentifierEnum, etc.)
 
 // Sample claim objects and creation of the claims array
 
@@ -42,10 +40,10 @@ const createClaim = (credentialSubject, claimType, identifier, identifierDescrip
 
 const sample_LICENSE_claim = {
   credentialSubject: { firstName: "Jack", middleName: "M.", lastName: "Johnson" },
-  claimType: ClaimTypeEnum.LICENSE,
-  identifier: "ID-12345", // Example identifier
-  identifierDescriptor: "Driver's License ID",
-  subtype: "Driver",
+  claimType: ClaimTypeEnum.INSURANCE,
+  identifier: "7138923", // Example identifier
+  identifierDescriptor: "NPM",
+  subtype: "Insurance Provider",
   reference: "DL-12345-AB",
   referenceSystem: ReferenceSystemEnum.TRUA,
   referenceType: ReferenceTypeEnum.BIO_ID
@@ -53,10 +51,10 @@ const sample_LICENSE_claim = {
 
 const sample_CERTIFICATION_claim = {
   credentialSubject: { firstName: "Bob", middleName: "D.", lastName: "Smith" },
-  claimType: ClaimTypeEnum.CERTIFICATION,
-  identifier: "ID-12345", // Example identifier
-  identifierDescriptor: "Professional Certification ID",
-  subtype: "Project Management",
+  claimType: ClaimTypeEnum.INSURANCE,
+  identifier: "85034", // Example identifier
+  identifierDescriptor: "License Number",
+  subtype: "Insurance Provider",
   reference: "jonnyappleseed@rmail.com",
   referenceSystem: ReferenceSystemEnum.TRUA,
   referenceType: ReferenceTypeEnum.E_MAIL
@@ -64,10 +62,10 @@ const sample_CERTIFICATION_claim = {
 
 const sample_DEGREE_claim = {
   credentialSubject: { firstName: "Carol", middleName: "L.", lastName: "Taylor" },
-  claimType: ClaimTypeEnum.DEGREE,
+  claimType: ClaimTypeEnum.INSURANCE,
   identifier: "ID-12345", // Example identifier
-  identifierDescriptor: "University Degree ID",
-  subtype: "Bachelor of Science",
+  identifierDescriptor: "NPM",
+  subtype: "Insurance Provider",
   reference: "P987987987978",
   referenceSystem: ReferenceSystemEnum.CE,
   referenceType: ReferenceTypeEnum.PUID

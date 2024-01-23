@@ -1,7 +1,8 @@
 export const ClaimTypeEnum = {
-    LICENSE: "license",
-    CERTIFICATION: "certification",
-    DEGREE: "degree"
+    LICENSE: "Attorney",
+    CERTIFICATION: "Arborist",
+    DEGREE: "Degree",
+    INSURANCE: "Insurance"
     // Add more claim types as needed
 };
 
