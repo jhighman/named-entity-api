@@ -47,6 +47,10 @@ export const claimSchema = {
             enum: ['license', 'certification', 'degree'],
             description: 'The type of claim being made, such as a license, certification, or degree.'
         },
+        subtype: {
+            type: 'string',
+            description: 'An optional subtype of the claim, providing additional categorization or details.'
+        },
         identifier: {
             type: 'string',
             description: 'A unique identifier for the claim.'
@@ -54,10 +58,6 @@ export const claimSchema = {
         identifierDescriptor: {
             type: 'string',
             description: 'A descriptive or explanatory statement about the claim’s identifier.'
-        },
-        subtype: {
-            type: 'string',
-            description: 'An optional subtype of the claim, providing additional categorization or details.'
         },
         reference: {
             type: 'string',

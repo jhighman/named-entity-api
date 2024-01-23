@@ -26,13 +26,13 @@ const generateWorkflowId = () => {
   return workflowIdCounter.toString();
 };
 
-const createClaim = (credentialSubject, claimType, identifier, identifierDescriptor, subtype, reference, referenceSystem, referenceType) => ({
+const createClaim = (credentialSubject, claimType, subtype, identifier, identifierDescriptor, reference, referenceSystem, referenceType) => ({
   workflowId: generateWorkflowId(),
   credentialSubject,
   claimType,
+  subtype,
   identifier,
   identifierDescriptor,
-  subtype,
   reference,
   referenceSystem,
   referenceType
@@ -41,9 +41,9 @@ const createClaim = (credentialSubject, claimType, identifier, identifierDescrip
 const sample_LICENSE_claim = {
   credentialSubject: { firstName: "Jack", middleName: "M.", lastName: "Johnson" },
   claimType: ClaimTypeEnum.INSURANCE,
+  subtype: "Insurance Provider",
   identifier: "7138923", // Example identifier
   identifierDescriptor: "NPM",
-  subtype: "Insurance Provider",
   reference: "DL-12345-AB",
   referenceSystem: ReferenceSystemEnum.TRUA,
   referenceType: ReferenceTypeEnum.BIO_ID
@@ -52,9 +52,9 @@ const sample_LICENSE_claim = {
 const sample_CERTIFICATION_claim = {
   credentialSubject: { firstName: "Bob", middleName: "D.", lastName: "Smith" },
   claimType: ClaimTypeEnum.INSURANCE,
+  subtype: "Insurance Provider",
   identifier: "85034", // Example identifier
   identifierDescriptor: "License Number",
-  subtype: "Insurance Provider",
   reference: "jonnyappleseed@rmail.com",
   referenceSystem: ReferenceSystemEnum.TRUA,
   referenceType: ReferenceTypeEnum.E_MAIL
@@ -63,9 +63,9 @@ const sample_CERTIFICATION_claim = {
 const sample_DEGREE_claim = {
   credentialSubject: { firstName: "Carol", middleName: "L.", lastName: "Taylor" },
   claimType: ClaimTypeEnum.INSURANCE,
+  subtype: "Insurance Provider",
   identifier: "ID-12345", // Example identifier
   identifierDescriptor: "NPM",
-  subtype: "Insurance Provider",
   reference: "P987987987978",
   referenceSystem: ReferenceSystemEnum.CE,
   referenceType: ReferenceTypeEnum.PUID
