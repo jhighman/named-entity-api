@@ -1,7 +1,7 @@
 import { workItemSchema, errorSchema, claimSchema, verifiedClaimSchema, workItemListSchema } from '../schemas/index.js'
 import { getWorkItems, getWorkItemById /* other exported methods */ } from '../models/work.model.js';
 import { getAllClaims, getClaimByWorkflowId } from '../models/claim.model.js';
-import { getAllVerifiedClaims, getVerifiedClaimByWorkflowId } from '../models/verified.claim.model.js';
+import { getAllVerifiedClaims, getVerifiedClaimByWorkflowId,createVerifiedClaim } from '../models/verified.claim.model.js';
 
 export default async function (fastify, opts) {
   fastify.setReplySerializer(payload => JSON.stringify(payload, null, 2));
@@ -182,6 +182,38 @@ export default async function (fastify, opts) {
       }); 
     } else {
       return verifiedClaim;
+    }
+  });
+
+  // POST route to handle verified claims
+  fastify.post('/verified/claim', {
+    schema: {
+      body: verifiedClaimSchema, // References the schema added above for request body validation
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            success: { type: 'boolean' },
+            message: { type: 'string' },
+            data: { $ref: 'verifiedClaim#' } // Optional, if you wish to return the created claim in the response
+          }
+        }
+      }
+    }
+  }, async (request, reply) => {
+    try {
+      // Extract the claim data from the request body
+      const claimData = request.body;
+
+      // Process the claim data (e.g., create a new claim, save to database, etc.)
+      // Replace the following line with your actual claim processing logic
+      const result = createVerifiedClaim(claimData); // Assuming createClaim is a function to process and save the claim
+
+      // Send a success response with the result
+      reply.send({ success: true, message: 'Claim processed successfully', data: result });
+    } catch (error) {
+      // Handle any errors
+      reply.status(500).send({ success: false, message: error.message });
     }
   });
 
